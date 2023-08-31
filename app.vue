@@ -3,7 +3,8 @@ import useStatus from "@/composables/useStatus";
 
 import "normalize.css";
 
-const { productStatus, statusUpdates, pending, refetch } = useStatus();
+const { productStatus, statusUpdates, refetch } = useStatus();
+
 const isOpenNotifications = ref(false);
 
 await refetch();
@@ -32,14 +33,7 @@ const changeTheme = (newTheme: string) => {
     </header>
     <section class="app_hero">
       <h1>Altura platform status</h1>
-      <!-- hardcoding the pending state to clone the real example, 
-        I don't really know where this information comes from -->
-      <div v-if="pending">
-        Het platform ondervindt momenteel problemen met inloggen. Wij zijn hier
-        momenteel mee bezig. Mon, 15 May 2023 12:30:00 GMT
-      </div>
-
-      <span v-else>Geen openstaande meldingen</span>
+      <span>Geen openstaande meldingen</span>
       <div class="app_hero_notifications" v-if="isOpenNotifications">
         <span> {{ dateFrom }}</span> <span>{{ statusUpdates[0].message }}</span>
       </div>
@@ -110,6 +104,8 @@ const changeTheme = (newTheme: string) => {
 :global(body) {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
+$large: 1600px;
+$small: 1000px;
 main {
   display: grid;
 
@@ -119,14 +115,24 @@ main {
 }
 
 header {
-  align-items: center;
-  padding-left: 70px;
-  padding-right: 70px;
-  height: 70px;
-  background-color: var(--background);
-  display: flex;
-  justify-content: space-between;
-
+  @media screen and (max-width: $small) {
+    align-items: center;
+    padding-left: 70px;
+    padding-right: 70px;
+    height: 70px;
+    background-color: var(--background);
+    display: flex;
+    justify-content: space-between;
+  }
+  @media screen and (max-width: $large) {
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 70px;
+    background-color: var(--background);
+    display: flex;
+    justify-content: space-between;
+  }
   > img {
     height: 1rem;
   }
@@ -141,11 +147,11 @@ header {
     }
   }
   > a {
-    background-color: var(--primary-400);
-    padding-top: 5px;
+    background-color: var(--primary-500);
+    padding: 12px;
     color: var(--light-text-color);
     border-radius: 5%;
-    padding: 8px;
+    text-decoration: none;
   }
 }
 
@@ -158,8 +164,16 @@ header {
   padding-right: 60px;
   padding-top: 80px;
   padding-bottom: 40px;
-  > h1 {
-    font-size: 60px;
+  @media screen and (max-width: $small) {
+    > h1 {
+      font-size: 30px;
+    }
+  }
+
+  @media screen and (max-width: $large) {
+    > h1 {
+      font-size: 60px;
+    }
   }
   > span {
     margin-left: 5px;
@@ -219,16 +233,32 @@ header {
 
 .app_pruductstatus_block_status {
   color: var(--primary-400);
-  font-weight: 300;
+  font-weight: 400;
+  font-size: large;
 }
 
-.app_help_section {
-  background-color: var(--background);
-  padding-bottom: 120px;
-  display: flex;
-  padding-top: 100px;
-  width: 100%;
-  margin: auto;
+@media screen and (max-width: $large) {
+  .app_help_section {
+    background-color: var(--background);
+    padding-bottom: 120px;
+    display: flex;
+
+    padding-top: 100px;
+    width: 100%;
+    margin: auto;
+  }
+}
+
+@media screen and (max-width: $small) {
+  .app_help_section {
+    background-color: var(--background);
+    padding-bottom: 120px;
+    display: flex;
+    flex-direction: column;
+    padding-top: 100px;
+    width: 100%;
+    margin: auto;
+  }
 }
 
 .app_help_block {
@@ -259,8 +289,6 @@ header {
 }
 
 footer {
-  width: 90%;
-  margin: auto;
   align-items: center;
   padding-left: 70px;
   padding-right: 70px;
@@ -270,16 +298,30 @@ footer {
   display: flex;
   justify-content: space-between;
 
-  > div {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    color: #979797;
-    > img {
-      height: 30px;
+  @media screen and (max-width: $small) {
+    > div {
+      font-size: x-small;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      color: #979797;
+      > img {
+        height: 30px;
+      }
     }
   }
 
+  @media screen and (max-width: $large) {
+    > div {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      color: #979797;
+      > img {
+        height: 30px;
+      }
+    }
+  }
   > button {
     background-color: var(--primary-400);
     color: var(--light-text-color);
