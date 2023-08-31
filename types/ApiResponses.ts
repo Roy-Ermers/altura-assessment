@@ -7,7 +7,7 @@ interface ProductStatus {
   /**
    * The name of the product.
    */
-  name: string;
+  name: any ;
 
   /**
    * The status of the product.

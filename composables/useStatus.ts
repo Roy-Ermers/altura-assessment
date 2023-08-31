@@ -21,10 +21,22 @@ interface useStatusReturn {
   refetch: () => Promise<void>;
 }
 export default function useStatus(): useStatusReturn {
-  // use the following variables:
-  const API_ENDPOINT = "https://strapi.altura.io/status" as const;
+  const pending = ref(false);
+  const statusUpdates: Ref<StatusUpdate[] | undefined> = ref();
+  const productStatus: Ref<ProductStatus | undefined> = ref();
 
-  // TODO: implement this function using the $fetch function from nuxt.
+  const refetch = async (): Promise<void> => {
+    pending.value = true;
 
-  return {} as useStatusReturn;
+    const API_ENDPOINT = "https://strapi.altura.io/status" as const;
+    const response: any = await $fetch(API_ENDPOINT);
+    
+    statusUpdates.value = response.statusUpdates;
+    productStatus.value = response.productStatus; 
+
+    pending.value = false;
+  };
+
+
+  return { productStatus, statusUpdates, pending, refetch } as useStatusReturn;
 }

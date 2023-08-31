@@ -1,3 +1,10 @@
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime"
+
+dayjs.extend(relativeTime)
+
+
+
 /**
  * Returns a relative date string from a given date string.
  * @param date The date string to convert to a relative date string.
@@ -16,6 +23,9 @@ export default function useRelativeDate(
   date: string | Ref<string>
 ): Ref<string> {
   const result = ref<string>("Unknown");
+
+  result.value = dayjs(`${date}`).fromNow() 
+
 
   return result;
 }
