@@ -20,6 +20,11 @@ interface useStatusReturn {
    */
   refetch: () => Promise<void>;
 }
+
+interface Response{
+  statusUpdates: StatusUpdate[]
+  productStatus: ProductStatus
+}
 export default function useStatus(): useStatusReturn {
   const pending = ref(false);
   const statusUpdates: Ref<StatusUpdate[] | undefined> = ref();
@@ -29,7 +34,7 @@ export default function useStatus(): useStatusReturn {
     pending.value = true;
 
     const API_ENDPOINT = "https://strapi.altura.io/status" as const;
-    const response: any = await $fetch(API_ENDPOINT);
+    const response: Response = await $fetch(API_ENDPOINT, {method: "GET"});
     
     statusUpdates.value = response.statusUpdates;
     productStatus.value = response.productStatus; 
