@@ -4,7 +4,7 @@
 
   Since this is an assessment, you can earn bonuspoints if you add a dark mode switch in the status page!
 */
-[data-theme="light"] {
+html:not(.dark), [data-theme="light"] {
   --background: #f7f8fc;
   --background-text-color: var(--dark-text-color);
   --light-text-color: var(--shade-0);
