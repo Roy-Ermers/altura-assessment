@@ -21,4 +21,4 @@ The use of other packages is allowed, but don't overdo it. We want to see your c
 Also we want to see your own SCSS, so don't use a CSS framework like Bootstrap or Tailwind. Also please keep using typescript in this project.
 
 
-To deliver your code you can make a pull request to this repository from your fork or send us the link to your repository to [roy@altura.io](mailto:roy@altura.io).
+To deliver your code you can make a fork and send us the link to your repository to [roy@altura.io](mailto:roy@altura.io).
